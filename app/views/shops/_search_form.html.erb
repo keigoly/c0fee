@@ -1,0 +1,36 @@
+<%= form_with(scope: :search_shop, url: shops_path, method: :get, local: true) do |s|%>
+	<div class="row">
+
+	<div class="input-field col s12 l5">
+	<i class="material-icons prefix">mode_edit</i>
+		<%= s.label(:name, Shop.human_attribute_name(:name)) %>
+		<%= s.text_field :name,value: @shop_search_params[:name] %>
+	</div>
+
+	<div class="input-field col s12 l5">
+		<i class="material-icons prefix">location_on</i>
+		<%= s.label(:address, Shop.human_attribute_name(:address)) %>
+		<%= s.text_field :address,value: @shop_search_params[:address] %>
+	</div>
+
+	<div class="actions col s12 l1">
+		<%= s.submit t('.submit_search'),class:"btn waves-effect waves-light white"%>
+	</div>
+
+	<% if @shop_search_params.present? %>
+		<div class="actions col s12 l1">
+			<%= link_to t('.return'), shops_path, class:"btn waves-effect waves-light"%>
+		</div>
+	<% end %>
+	</div>
+<% end %>
+
+<script>
+$(function(){
+    if (window.matchMedia( '(min-width: 600px)' ).matches) {
+$(function(){
+		$(".row").addClass("valign-wrapper");
+		});
+	};
+});
+</script>

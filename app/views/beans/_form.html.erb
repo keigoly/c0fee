@@ -1,0 +1,108 @@
+<%= form_with(model: bean ,local: true) do |b| %>
+	<%= render 'layouts/error_messages', model: b.object %>
+
+		<%= b.hidden_field :user_id, value: current_user.id %>
+		<%= b.hidden_field :shop_id, value: shop.id %>
+<!--
+	<% if bean.bean_image? %>
+		<div class="center-align">
+			<%= image_tag bean.bean_image.url, size: '300' %>
+		</div>
+	<% end %>
+-->
+
+	<div class="file-field input-field col s12">
+		<button type="button" id="bean_select_file_button" class="waves-effect waves-light btn-small">
+		<%=t('.select_bean_image')%><i class="material-icons right">photo</i></button>
+    <%= b.file_field :bean_image %>
+		<div class="file-path-wrapper">
+			<input id="bean_filename" readonly type="text" value="" class="file-path validate">
+    </div>
+  </div><br />
+
+	<div class="input-field col s12 beancountry">
+		<i class="material-icons prefix">public</i>
+		<%= b.select :country, options_for_select(Bean.countries.keys.map {|k| [I18n.t("enums.bean.country.#{k}"), "#{k}",{data:{ icon: "/assets/#{k}.png"}} ]},selected: bean.country), {include_blank: true}, {class: 'icons',value: bean.country} %>
+		<%= b.label :country %>
+	</div><br />
+
+	<div class="input-field col s12">
+		<i class="material-icons prefix">place</i>
+		<%= b.text_field :area, class: "autocomplete" %>
+		<%= b.label :area %>
+	</div><br />
+
+	<div class="input-field col s12">
+		<i class="material-icons prefix">home</i>
+		<%= b.text_field :farm, class: "autocomplete"%>
+		<%= b.label :farm %><br />
+	</div><br />
+
+	<div class="input-field col s12">
+		<i class="material-icons prefix">local_florist</i>
+		<%= b.select :variety, Bean.varieties.keys.map {|k| [I18n.t("enums.bean.variety.#{k}"),k]}, include_blank: true %>
+		<%= b.label :variety %><br />
+	</div><br />
+
+	<div class="input-field col s12">
+		<i class="material-icons prefix">loop</i>
+		<%= b.select :process, Bean.processes.keys.map {|k| [I18n.t("enums.bean.process.#{k}"),k]}, include_blank: true %>
+		<%= b.label :process %><br />
+	</div><br />
+
+	<div class="input-field col s12">
+		<i class="material-icons prefix">invert_colors</i>
+		<%= b.select :roast, Bean.roasts.keys.map {|k| [I18n.t("enums.bean.roast.#{k}"),k]}, include_blank: true %>
+		<%= b.label :roast %>
+	</div><br />
+
+	<div class="input-field col s12">
+		<i class="material-icons prefix">date_range</i>
+		<input type="text" name="bean[roast_date]" id="bean_roast_date" class="datepicker">
+		<%= b.label :roast_date %>
+	</div><br />
+
+	<div class="input-field col s12">
+		<% if I18n.locale == :ja %>
+		<i class="fas fa-yen-sign prefix"></i>
+		<% else %>
+		<i class="material-icons prefix">attach_money</i>
+		<% end %>
+		<%= b.number_field :price, step: 10 %>
+		<%= b.label :price,t('.price') %>
+	</div><br />
+
+		<%= b.fields_for :impression do |i| %>
+
+			<div class="input-field col s12">
+				<i class="material-icons prefix">change_history</i>
+				<%= i.select :i_sour,[[1,1],[2,2],[3,3],[4,4],[5,5]], include_blank: true %>
+				<%= i.label :i_sour%>
+			</div><br />
+
+			<div class="input-field col s12">
+				<i class="material-icons prefix">panorama_fish_eye</i>
+				<%= i.select :i_sweet,[[1,1],[2,2],[3,3],[4,4],[5,5]], include_blank: true %>
+				<%= i.label :i_sweet %>
+			</div><br />
+
+			<div class="input-field col s12">
+				<i class="material-icons prefix">crop_square</i>
+				<%= i.select :i_bitter,[[1,1],[2,2],[3,3],[4,4],[5,5]], include_blank: true %>
+				<%= i.label :i_bitter %>
+			</div><br />
+
+			<div class="input-field col s12">
+				<i class="material-icons prefix">chat_bubble_outline</i>
+				<%= i.text_area :i_comment  %>
+				<%= i.label :i_comment %><br />
+			</div><br />
+
+		<% end %>
+
+  <div class="actions">
+    <%= button_tag class: "waves-effect waves-light btn register_bean" do %><%=t('.register')%><% end %>
+  </div>
+
+<% end %>
+<br />

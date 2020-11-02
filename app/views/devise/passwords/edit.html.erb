@@ -1,0 +1,24 @@
+<h3 class="center-align"><%=t('.change_my_password')%></h3>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+  <%= f.hidden_field :reset_password_token %>
+
+  <div class="input-field col s12">
+		<i class="material-icons prefix">lock_outline</i>
+    <%= f.label :password, t('.new_password') %><br />
+    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+  </div>
+
+  <div class="input-field col s12">
+		<i class="material-icons prefix">lock_outline</i>
+    <%= f.label :password_confirmation, t('.confirm_new_password') %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="actions">
+    <%= button_tag class: "waves-effect waves-light btn" do %><%= t('.change_my_password') %><% end %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

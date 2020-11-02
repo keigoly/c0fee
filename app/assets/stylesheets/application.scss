@@ -1,0 +1,196 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+	* files in this directory. Styles in this file should be added after the last require_* statement.
+	* It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "materialize";
+@import "material_icons";
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+
+#logo {
+	text-decoration: none;
+	font-family: "Osaka-Mono";
+	font-size: 50px;
+}
+
+#no_avatar_image,
+#avatar_image {
+	display: inline-block;
+	position: relative;
+	top: 13px;
+}
+
+// img.material-icons.prefix {
+// 	top: 20px;
+// 	font-size: 22px;
+// }
+
+#search_form {
+	margin-top: 30px;
+}
+
+#index_title {
+	text-align: center;
+}
+
+#recipes_image,
+#beans_image,
+#shops_image {
+	position: relative;
+}
+
+#country_flag {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 75px;
+	height: 50px;
+}
+
+#country_flag_in_card_reveal {
+	width: 75px;
+	height: 50px;
+}
+
+.nav-wrapper .material-icons,
+.card-content .material-icons,
+.card-reveal .material-icons,
+.card-action .material-icons,
+#shop_info .material-icons {
+	display: inline-flex;
+	vertical-align: middle;
+}
+
+.card.small,
+.card.medium,
+.card.large {
+	position: relative;
+}
+
+// .card.medium {
+// 	height: 380px
+// }
+
+.card.small .card-image,
+.card.medium .card-image,
+.card.large .card-image {
+	max-height: 82%;
+	// overflow: hidden;
+}
+
+.card.small .card-image.shop-image,
+.card.medium .card-image.shop-image,
+.card.large .card-image.shop-image {
+	max-height: 55%;
+	// overflow: hidden;
+}
+
+.card.small .card-image.recipe-image,
+.card.medium .card-image.recipe-image,
+.card.large .card-image.recipe-image {
+	max-height: 60%;
+	// overflow: hidden;
+}
+
+
+.card.small .card-content,
+.card.medium .card-content,
+.card.large .card-content {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 8px;
+	margin-bottom: 13px;
+	padding: 0;
+	// margin: auto;
+}
+
+.card-action .register_bean,
+.card-action .make_recipe {
+	position: absolute;
+	left: 44%;
+}
+
+.card-shop-info {
+	position: absolute;
+	bottom: 15%;
+}
+
+.shop-name {
+	font-size: 18px;
+}
+
+#user_avatar,
+#bean_bean_image,
+#recipe_recipe_image,
+#shop_shop_image {
+	display: none;
+}
+
+#dropdown_nav {
+	width: 170px;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+}
+
+.pagination {
+	text-align: center;
+}
+
+th,
+td {
+	text-align: center;
+}
+
+#thumbnail {
+	border-radius: 40px;
+	height: 70px;
+	width: 70px;
+}
+
+.container {
+	margin: 0 auto;
+	max-width: 1500px;
+	width: 100%;
+}
+
+.input-field .fas.fa-thermometer-three-quarters.prefix {
+	padding-left: 7px;
+}
+
+
+@media only screen and (min-width: 601px) {
+	.container {
+		width: 85%;
+	}
+}
+
+@media only screen and (min-width: 993px) {
+	.container {
+		width: 90%;
+	}
+}
+
+img {
+	object-fit: cover;
+}
+
+#card_option a {
+	margin: 0;
+}

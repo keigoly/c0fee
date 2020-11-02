@@ -1,0 +1,65 @@
+<% if recipes.present? %>
+	<% Array(recipes).each do |recipe| %>
+		<div class="col s12 m6 l3">
+			<div class="card medium">
+				<div class="card-image recipe-image">
+					<div id="recipes_image">
+						<% if recipe.recipe_image? %>
+							<%=link_to image_tag(recipe.recipe_image.to_s), recipe_path(recipe) %>
+						<% else%>
+							<%=link_to image_tag('C0FEE.png'), recipe_path(recipe) %>
+						<% end %>
+					</div>
+				</div>
+				<div>
+					<p>・<%= recipe.extraction_i18n %></p>
+					<p><%= recipe.taste.t_comment.truncate(17) %></p>
+				</div>
+
+				<div class="card-action">
+						<% if user_signed_in? && @liked_recipes.nil?%>
+							<span id="recipe_like_button_<%= recipe.id %>" class="left favorite" ><%= render 'recipe_likes/like_recipe_button', recipe: recipe %></span>
+						<% else %>
+							<span class="red-text favorite"><i class="material-icons">favorite</i><%= recipe_liked_counts(recipe) %></span>
+						<% end %>
+					<i class="card-title material-icons right activator">more_vert</i>
+				</div>
+
+				<div class="card-reveal center-align">
+					<span class="card-title">
+						<i class="material-icons right">close</i>
+					</span>
+					<p>
+						<% if recipe.user.avatar?%>
+							<%= link_to image_tag(recipe.user.avatar_url(:thumb).to_s, id: 'thumbnail'), user_path(recipe.user)%>
+						<% else %>
+							<%= image_tag 'no_avatar.png', id: 'thumbnail' %>
+						<% end %>
+						<%= link_to "@#{recipe.user.username}", user_path(id: recipe.user.id) %>
+					</p>
+
+					<p><%= link_to image_tag("#{recipe.bean.country}.png" ,class: "tooltipped",id: "country_flag_in_card_reveal",data:{position:"right",tooltip: recipe.bean.country_i18n }), bean_path(recipe.bean)%></p>
+					<p><%= recipe.hot_ice_i18n %></p>
+					<p><%= Taste.human_attribute_name(:t_sour)%>：<%= recipe.taste.t_sour %></p>
+					<p><%= Taste.human_attribute_name(:t_bitter)%>：<%= recipe.taste.t_bitter %></p>
+					<p><%= Taste.human_attribute_name(:t_sweet)%>：<%= recipe.taste.t_sweet %></p>
+					<p><%= Taste.human_attribute_name(:t_aroma)%>：<%= recipe.taste.t_aroma %></p>
+					<p><%= Taste.human_attribute_name(:t_fullbody)%>：<%= recipe.taste.t_fullbody %></p>
+					<span>
+						<% if current_user == recipe.user %>
+
+						<%= link_to edit_recipe_path(recipe),class: "tooltipped red-text",data:{position:"top", tooltip: t('.edit')} do %>
+							<%= content_tag :i, "edit", class: "material-icons" %>
+						<% end %>
+
+						<%= link_to recipe, method: :delete,class: "tooltipped red-text",data:{position:"top", tooltip: t('.delete'), confirm: t('.are_you_sure?')} do%>
+							<%= content_tag :i, "delete", class: "material-icons" %>
+						<% end %>
+
+						<% end %>
+					</span>
+				</div>
+			</div>
+		</div>
+		<% end %>
+	<% end %>
